@@ -8,35 +8,58 @@
       <div class="choice-card">
         <h3>Looking for work</h3>
         <p>Apply for available roles or send us your CV.</p>
-        <button class="btn-primary" onclick="showContactForm('jobs')">Apply Now</button>
+        <button class="btn-primary" onclick="showContactForm('jobs')" aria-label="Open job application form">Apply Now</button>
       </div>
       <div class="choice-card">
         <h3>Need support</h3>
         <p>Tell us what kind of help you are looking for.</p>
-        <button class="btn-primary" onclick="showContactForm('help')">Get Help</button>
+        <button class="btn-primary" onclick="showContactForm('help')" aria-label="Open support request form">Get Help</button>
       </div>
     </div>
 
     <!-- Jobs form -->
     <div class="contact-form-container" id="jobsForm" style="display: none;">
-      <button class="back-button" onclick="showContactChoices()">← Back</button>
+      <button class="back-button" onclick="showContactChoices()" aria-label="Go back to contact options">← Back</button>
       <h3>Send Your CV</h3>
-      <form onsubmit="handleJobsSubmit(event)">
-        <input type="text" name="name" placeholder="Full Name" required />
-        <input type="email" name="email" placeholder="Email Address" required />
-        <input type="file" name="cv" accept=".pdf,.doc,.docx" placeholder="CV Document" required />
+      <form onsubmit="handleJobsSubmit(event)" name="jobsForm">
+        <div class="form-group">
+          <label for="jobs-name">Full Name *</label>
+          <input type="text" id="jobs-name" name="name" placeholder="John Doe" required aria-required="true" />
+        </div>
+        <div class="form-group">
+          <label for="jobs-email">Email Address *</label>
+          <input type="email" id="jobs-email" name="email" placeholder="john@example.com" required aria-required="true" />
+        </div>
+        <div class="form-group">
+          <label for="jobs-phone">Phone Number</label>
+          <input type="tel" id="jobs-phone" name="phone" placeholder="+45 12 34 56 78" />
+        </div>
+        <div class="form-group">
+          <label for="jobs-cv">CV Document *</label>
+          <input type="file" id="jobs-cv" name="cv" accept=".pdf,.doc,.docx" required aria-required="true" />
+          <small>Accepted formats: PDF, DOC, DOCX</small>
+        </div>
         <button type="submit" class="btn-primary">Send CV</button>
       </form>
     </div>
 
     <!-- Help form -->
     <div class="contact-form-container" id="helpForm" style="display: none;">
-      <button class="back-button" onclick="showContactChoices()">← Back</button>
+      <button class="back-button" onclick="showContactChoices()" aria-label="Go back to contact options">← Back</button>
       <h3>Request Support</h3>
-      <form onsubmit="handleHelpSubmit(event)">
-        <input type="text" name="company" placeholder="Company Name" required />
-        <input type="email" name="email" placeholder="Email Address" required />
-        <textarea name="message" placeholder="What do you need help with?" required></textarea>
+      <form onsubmit="handleHelpSubmit(event)" name="helpForm">
+        <div class="form-group">
+          <label for="help-company">Company Name *</label>
+          <input type="text" id="help-company" name="company" placeholder="Your Company" required aria-required="true" />
+        </div>
+        <div class="form-group">
+          <label for="help-email">Email Address *</label>
+          <input type="email" id="help-email" name="email" placeholder="contact@company.com" required aria-required="true" />
+        </div>
+        <div class="form-group">
+          <label for="help-message">How can we help? *</label>
+          <textarea id="help-message" name="message" placeholder="Tell us about your staffing needs..." rows="5" required aria-required="true"></textarea>
+        </div>
         <button type="submit" class="btn-primary">Send Request</button>
       </form>
     </div>

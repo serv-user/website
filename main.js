@@ -130,28 +130,88 @@ function showContactChoices() {
 
 function handleJobsSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
   const originalText = btn.textContent;
+  
   btn.disabled = true;
-  btn.textContent = '✓ Sent!';
-  setTimeout(() => {
-    showContactChoices();
-    e.target.reset();
-    btn.textContent = originalText;
-    btn.disabled = false;
-  }, 1500);
+  btn.textContent = '⏳ Sending...';
+  
+  // Submit to Formspree
+  fetch('https://formspree.io/f/mbjkydbq', {
+    method: 'POST',
+    body: new FormData(form),
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      btn.textContent = '✓ CV Sent!';
+      btn.style.background = '#10b981';
+      setTimeout(() => {
+        showContactChoices();
+        form.reset();
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 2000);
+    } else {
+      throw new Error('Form submission failed');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    btn.textContent = '✗ Failed';
+    btn.style.background = '#ef4444';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 2000);
+  });
 }
 
 function handleHelpSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
   const originalText = btn.textContent;
+  
   btn.disabled = true;
-  btn.textContent = '✓ Sent!';
-  setTimeout(() => {
-    showContactChoices();
-    e.target.reset();
-    btn.textContent = originalText;
-    btn.disabled = false;
-  }, 1500);
+  btn.textContent = '⏳ Sending...';
+  
+  // Submit to Formspree
+  fetch('https://formspree.io/f/mbjkydbq', {
+    method: 'POST',
+    body: new FormData(form),
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      btn.textContent = '✓ Request Sent!';
+      btn.style.background = '#10b981';
+      setTimeout(() => {
+        showContactChoices();
+        form.reset();
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 2000);
+    } else {
+      throw new Error('Form submission failed');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    btn.textContent = '✗ Failed';
+    btn.style.background = '#ef4444';
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 2000);
+  });
 }
