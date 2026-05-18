@@ -3,7 +3,7 @@ const app = document.getElementById("app");
 /* LOAD SECTION */
 async function loadSection(name) {
   try {
-    const res = await fetch(`/sections/${name}.html`);
+    const res = await fetch(`./sections/${name}.html`);
     
     if (!res.ok) {
       throw new Error(`Failed to load ${name}: ${res.status}`);
