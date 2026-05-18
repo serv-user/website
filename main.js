@@ -138,7 +138,7 @@ function handleJobsSubmit(e) {
   
   const subject = encodeURIComponent('Job Application from ' + name);
   const body = encodeURIComponent(
-    `Hello,\n\nI am interested in working with Radu Services.\n\n` +
+    `Hello,\n\nI am interested in working with Radu Total Service.\n\n` +
     `Name: ${name}\n` +
     `Email: ${email}\n` +
     `Phone: ${phone}\n` +
@@ -173,7 +173,7 @@ function handleHelpSubmit(e) {
   
   const subject = encodeURIComponent('Support Request from ' + company);
   const body = encodeURIComponent(
-    `Hello,\n\nI need support from Radu Services.\n\n` +
+    `Hello,\n\nI need support from Radu Total Service.\n\n` +
     `Company: ${company}\n` +
     `Email: ${email}\n\n` +
     `Request:\n${message}\n\n` +
