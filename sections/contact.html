@@ -1,0 +1,44 @@
+<section class="section">
+  <h2>Get in touch</h2>
+  <p>Choose what fits your situation best.</p>
+
+  <div class="contact-wrapper">
+    <!-- Initial choice cards -->
+    <div class="contact-choices" id="contactChoices">
+      <div class="choice-card">
+        <h3>Looking for work</h3>
+        <p>Apply for available roles or send us your CV.</p>
+        <button class="btn-primary" onclick="showContactForm('jobs')">Apply Now</button>
+      </div>
+      <div class="choice-card">
+        <h3>Need support</h3>
+        <p>Tell us what kind of help you are looking for.</p>
+        <button class="btn-primary" onclick="showContactForm('help')">Get Help</button>
+      </div>
+    </div>
+
+    <!-- Jobs form -->
+    <div class="contact-form-container" id="jobsForm" style="display: none;">
+      <button class="back-button" onclick="showContactChoices()">← Back</button>
+      <h3>Send Your CV</h3>
+      <form onsubmit="handleJobsSubmit(event)">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <input type="file" name="cv" accept=".pdf,.doc,.docx" placeholder="CV Document" required />
+        <button type="submit" class="btn-primary">Send CV</button>
+      </form>
+    </div>
+
+    <!-- Help form -->
+    <div class="contact-form-container" id="helpForm" style="display: none;">
+      <button class="back-button" onclick="showContactChoices()">← Back</button>
+      <h3>Request Support</h3>
+      <form onsubmit="handleHelpSubmit(event)">
+        <input type="text" name="company" placeholder="Company Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <textarea name="message" placeholder="What do you need help with?" required></textarea>
+        <button type="submit" class="btn-primary">Send Request</button>
+      </form>
+    </div>
+  </div>
+</section>
