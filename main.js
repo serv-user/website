@@ -131,87 +131,69 @@ function showContactChoices() {
 function handleJobsSubmit(e) {
   e.preventDefault();
   const form = e.target;
+  const name = form.querySelector('[name="name"]').value;
+  const email = form.querySelector('[name="email"]').value;
+  const phone = form.querySelector('[name="phone"]').value || 'Not provided';
+  const cvFile = form.querySelector('[name="cv"]').files[0]?.name || 'CV attached';
+  
+  const subject = encodeURIComponent('Job Application from ' + name);
+  const body = encodeURIComponent(
+    `Hello,\n\nI am interested in working with Radu Services.\n\n` +
+    `Name: ${name}\n` +
+    `Email: ${email}\n` +
+    `Phone: ${phone}\n` +
+    `CV: ${cvFile}\n\n` +
+    `Best regards,\n${name}`
+  );
+  
+  const mailtoLink = `mailto:info@raduservices.dk?subject=${subject}&body=${body}`;
+  
   const btn = form.querySelector('button[type="submit"]');
   const originalText = btn.textContent;
-  
   btn.disabled = true;
-  btn.textContent = '⏳ Sending...';
+  btn.textContent = '✓ Opening email...';
   
-  // Submit to Formspree
-  fetch('https://formspree.io/f/mbjkydbq', {
-    method: 'POST',
-    body: new FormData(form),
-    headers: {
-      'Accept': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      btn.textContent = '✓ CV Sent!';
-      btn.style.background = '#10b981';
-      setTimeout(() => {
-        showContactChoices();
-        form.reset();
-        btn.textContent = originalText;
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 2000);
-    } else {
-      throw new Error('Form submission failed');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    btn.textContent = '✗ Failed';
-    btn.style.background = '#ef4444';
+  setTimeout(() => {
+    window.location.href = mailtoLink;
     setTimeout(() => {
+      showContactChoices();
+      form.reset();
       btn.textContent = originalText;
-      btn.style.background = '';
       btn.disabled = false;
-    }, 2000);
-  });
+    }, 500);
+  }, 500);
 }
 
 function handleHelpSubmit(e) {
   e.preventDefault();
   const form = e.target;
+  const company = form.querySelector('[name="company"]').value;
+  const email = form.querySelector('[name="email"]').value;
+  const message = form.querySelector('[name="message"]').value;
+  
+  const subject = encodeURIComponent('Support Request from ' + company);
+  const body = encodeURIComponent(
+    `Hello,\n\nI need support from Radu Services.\n\n` +
+    `Company: ${company}\n` +
+    `Email: ${email}\n\n` +
+    `Request:\n${message}\n\n` +
+    `Best regards,\n${company}`
+  );
+  
+  const mailtoLink = `mailto:info@raduservices.dk?subject=${subject}&body=${body}`;
+  
   const btn = form.querySelector('button[type="submit"]');
   const originalText = btn.textContent;
-  
   btn.disabled = true;
-  btn.textContent = '⏳ Sending...';
+  btn.textContent = '✓ Opening email...';
   
-  // Submit to Formspree
-  fetch('https://formspree.io/f/mbjkydbq', {
-    method: 'POST',
-    body: new FormData(form),
-    headers: {
-      'Accept': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      btn.textContent = '✓ Request Sent!';
-      btn.style.background = '#10b981';
-      setTimeout(() => {
-        showContactChoices();
-        form.reset();
-        btn.textContent = originalText;
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 2000);
-    } else {
-      throw new Error('Form submission failed');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    btn.textContent = '✗ Failed';
-    btn.style.background = '#ef4444';
+  setTimeout(() => {
+    window.location.href = mailtoLink;
     setTimeout(() => {
+      showContactChoices();
+      form.reset();
       btn.textContent = originalText;
-      btn.style.background = '';
       btn.disabled = false;
-    }, 2000);
-  });
+    }, 500);
+  }, 500);
 }
